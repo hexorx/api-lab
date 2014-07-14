@@ -4,44 +4,23 @@ HOST: http://www.google.com
 # Auth
 Notes API is a *short texts saving* service similar to its physical paper presence on your table.
 
-# Group Notes
-Notes related resources of the **Notes API**
+# Gist Fox API Root [/]
+Gist Fox API entry point.
 
-## Notes Collection [/notes]
-### List all Notes [GET]
-+ Response 200 (application/json)
+This resource does not have any attributes. Instead it offers the initial API affordances in the form of the HTTP Link header and HAL links.
 
-        [{
-          "id": 1, "title": "Jogging in park"
-        }, {
-          "id": 2, "title": "Pick-up posters from post-office"
-        }]
+## Retrieve Entry Point [GET]
 
-### Create a Note [POST]
-+ Request (application/json)
++ Response 200 (application/hal+json)
+    + Headers
 
-        { "title": "Buy cheese and bread for breakfast." }
-
-+ Response 201 (application/json)
-
-        { "id": 3, "title": "Buy cheese and bread for breakfast." }
-
-## Note [/notes/{id}]
-A single Note object with all its details
-
-+ Parameters
-    + id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
-
-### Retrieve a Note [GET]
-+ Response 200 (application/json)
-
-    + Header
-
-            X-My-Header: The Value
+            Link: <http:/api.gistfox.com/>;rel="self",<http:/api.gistfox.com/gists>;rel="gists"
 
     + Body
 
-            { "id": 2, "title": "Pick-up posters from post-office" }
-
-### Remove a Note [DELETE]
-+ Response 204
+            {
+                "_links": {
+                    "self": { "href": "/" },
+                    "gists": { "href": "/gists?{since}", "templated": true }
+                }
+            }
